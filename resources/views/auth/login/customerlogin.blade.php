@@ -345,25 +345,42 @@
     <body>
         <div class="container">
             <section id="content">
-                <form method="POST" action="{{url('/customer/login/auth')}}">
+                <form method="POST" action="{{ url('/customer/login/auth') }}">
                     @csrf
                     <h1>Login Form</h1>
                     <div>
-                        <input type="email" placeholder="email" id="email" name="email" required/>
+                        <input type="Email" placeholder="Email" id="Email" name="Email" required />
                     </div>
                     <div>
-                        <input type="password" placeholder="Password" id="password" name="password" required/>
+                        <input type="Password" Placeholder="Password" id="Password" name="Password" required />
                     </div>
                     <div>
-                        <label class="checkbox">
-                            <input type="checkbox" value="remember-me" id="rememberMe" name="rememberMe"> Remember me
-                        </label>
-                    </div>
-                    <div>
-                        <input type="submit" value="Log in" />
 
 
                     </div>
+                    
+                      <div style="margin-top:15px;">
+
+                        <!-- Create New Account -->
+                        <a href="{{ url('/customer/registration') }}"
+                            style="color:blue; text-decoration:none; margin-right:20px;">
+                            Create New Account
+                        </a>
+
+                        <!-- Home Page -->
+                        <a href="{{ url('/') }}" style="color:green; text-decoration:none;">
+                            Home 
+                        </a>
+
+                    </div>
+
+                    <div>
+                        <input type="submit" value="Login" />
+                    </div>
+
+                  
+
+
                 </form>
                 <!-- form -->
 

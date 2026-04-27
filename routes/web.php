@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Admin\AdminController;
+use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Customer\CustomerController;
 use App\Http\Controllers\Employee\EmployeeController;
 use App\Http\Controllers\Frontend\FrontendController;
@@ -36,21 +37,28 @@ Route::get('/type-products', [FrontendController::class,'typeProducts']);
 
  Route::get('/customer/login',[LoginController::class, 'customerLogin']);
  Route::post('/customer/login/auth',[LoginController::class, 'customerLoginAuth']);
-
-
-Auth::routes(['login' => false, 'register' => false]);
-
+ Route::get('/customer/registration',[LoginController::class, 'customerRegistration']);
+ Route::post('/customer/registration-store',[LoginController::class, 'customerRegistrationStore']);
+ Auth::routes(['login' => false, 'register' => false]);
+   
+ // Admin Route.......
+     
  Route::middleware(['role:admin'])->group(function(){
  Route::get('/admin/dashboard',[AdminController::class, 'dashboard']);
  Route::get('admin/logout',[AdminController::class,'adminLogout']);
+   
+ //category ROute.....
+   Route::get('/manage/category-create',[CategoryController::class, 'create']);
+   Route::post('/manage/category-store',[CategoryController::class, 'store']);
 });
 
-
+    // Employee Route..........   
  Route::middleware(['role:employee'])->group(function(){
  Route::get('/employee/dashboard',[EmployeeController::class, 'dashboard']);
  Route::get('employee/logout',[EmployeeController::class,'employeeLogout']);
 });
-
+ 
+   // customer Route......    
  Route::middleware(['role:customer'])->group(function(){
  Route::get('/customer/dashboard',[CustomerController::class, 'dashboard']);
  Route::get('customer/logout',[CustomerController::class,'customerLogout']);

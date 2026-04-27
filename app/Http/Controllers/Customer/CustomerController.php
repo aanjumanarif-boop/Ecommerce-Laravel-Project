@@ -10,7 +10,7 @@ class CustomerController extends Controller
 {
     public function dashboard ()
     {
-      return view('customer.customer-dashboard');
+      return view('Customer.customer-dashboard');
     }
 
    public function customerLogout()
