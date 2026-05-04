@@ -4,8 +4,10 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Category;
+use GrahamCampbell\ResultType\Success;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
+use Illuminate\Validation\Rules\Exists;
 
 class CategoryController extends Controller
 {
@@ -31,6 +33,52 @@ class CategoryController extends Controller
     $category->save();
    
         toastr()->success('Category created successfully.');
-     return redirect()->back();
+        return redirect()->back();
   }
+
+ public function list()
+ {
+  $categories = Category::get();
+
+  return view('admin.category.list',compact('categories'));
+ }
+  public function edit($id)
+  {
+    $category = category::find($id);
+    return view('admin.category.edit',compact('category'));
+  }
+  public function update( Request $request, $id)
+  {
+    $category = category::find($id);
+    $category->name = $request->name;
+    $category->slug = Str::slug($request->name);
+    
+    if(isset($request->image)){
+    if($category->image && file_exists('admin/category'.basename($category->image))){
+      unlink('admin/category'.basename($category->image));
+    }
+    $image = $request->file('image');
+    $imageName = rand().'.'.$image->getClientOriginalExtension(); //4347657.jpg
+    $image->move('admin/category',$imageName);
+    $category->image = url('admin/category/'.$imageName);  //http://127.0.0.1:8000/admin/category/4347657.jpg
+
+   }
+   $category->save();
+   toastr()->success('created updated successfully');
+   return redirect('/manage/category-list');
+}
+  
+  public function delete($id)
+  {
+    $category = category::find($id);
+
+      if($category->image && file_exists('admin/category'.basename($category->image))){
+      unlink('admin/category'.basename($category->image));
+    }
+     $category->delete();
+
+   toastr()->success('create updated successfully');
+   return redirect()->back();
+}
+
 }

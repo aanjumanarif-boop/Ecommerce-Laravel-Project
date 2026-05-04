@@ -266,8 +266,8 @@
             -ms-box-shadow: 0 1px 0 rgba(255, 255, 255, 0.8) inset;
             -o-box-shadow: 0 1px 0 rgba(255, 255, 255, 0.8) inset;
             box-shadow: 0 1px 0 rgba(255, 255, 255, 0.8) inset;
-            border: 1px solid #D69E31;
-            color: #85592e;
+            border: 1px solid #09993c;
+            color: #10700f;
             cursor: pointer;
             float: left;
             font: bold 15px Helvetica, Arial, sans-serif;
@@ -355,9 +355,8 @@
                         <input type="Password" Placeholder="Password" id="Password" name="Password" required />
                     </div>
                     <div>
+                   </div>
 
-
-                    </div>
                     
                       <div style="margin-top:15px;">
 
@@ -375,7 +374,7 @@
                     </div>
 
                     <div>
-                        <input type="submit" value="Login" />
+                        <input type="submit" value="login" />
                     </div>
 
                   
